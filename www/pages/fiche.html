@@ -1,0 +1,37 @@
+<ion-view view-title="Fiche Enfant">
+	<ion-content>
+		<div class="card">
+		  <div class="item item-divider">
+			Identité
+		  </div>
+		  <div class="item item-text-wrap">
+				Nom : {{nom}}
+				</br>
+				Âge : {{age}}
+				</br>
+				Classe : {{classe}}
+		  </div>
+		  <div class="item item-divider">
+			Pointage du Jour
+		  </div>
+		  <div class="item item-text-wrap">
+				Arrivée : 
+				</br>
+				Sortie :
+				</br>
+				Arrivée :
+				</br>
+				Sortie :
+		  </div>
+		</div>
+		<div class="padding" ng-click="entrer()">
+			<button class="button button-block button-balanced">Entrée</button>
+		</div>
+		<div class="padding" ng-click="sortir()">
+			<button class="button button-block button-assertive">Sortie</button>
+		</div>
+		<div class="padding" ng-click="modifier()">
+			<button class="button button-block button-energized">Modifier</button>
+		</div>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,20 @@
+<ion-view view-title="Liste des Enfants">
+	<ion-content>
+		<label class="item item-input item-select">
+			<i class="icon ion-search placeholder-icon"></i>
+			<input type="search" ng-model="searchquery" placeholder="Entrer le nom ou la classe ici"/>
+			<select ng-model="organiser">
+				<option selected value="nom">Organiser par nom</option>
+				<option value="classe">Organiser par classe</option>	
+			</select>
+		</label>
+					
+		
+			<!-- our list and list items -->
+		<ion-list>
+			<ion-item ng-repeat="task in enfants |filter : searchquery | orderBy : organiser" ng-click="ok(task)" ng-model="personne" >
+				{{task.nom + " en " + task.classe}}
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>
