@@ -1,0 +1,36 @@
+<ion-view view-title="Association Rozier en Donzon">
+	<ion-content>
+	
+		<label class="item item-input item-select">
+			<i class="icon ion-search placeholder-icon"></i>
+			<input type="search" ng-model="searchquery" placeholder="Entrer le nom ou la classe ici"/>
+			<select ng-model="organiser">
+				<option selected value="nom">Organiser par nom</option>
+				<option value="classe">Organiser par classe</option>	
+			</select>
+		</label>
+      
+      <ion-list >
+
+        <ion-item ng-repeat="item in enfants|filter : searchquery | orderBy : organiser" item="item"
+                  href="#/item/{{item.id}}" class="item-remove-animate">
+			{{ item.nom }}
+			
+			<ion-option-button class="button button-balanced"
+                             ng-click="arriver(item)">
+				Arrivée
+			</ion-option-button>
+			<ion-option-button class="button button-assertive"
+                             ng-click="sortir(item)">
+				Sortie
+			</ion-option-button>
+          
+			<ion-option-button class="button button-energized"
+								 ng-click="plus(item)">
+				Voir plus
+			 </ion-option-button>
+        </ion-item>
+      </ion-list>
+
+    </ion-content>
+</ion-view>
