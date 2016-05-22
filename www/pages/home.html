@@ -1,6 +1,5 @@
 <ion-view view-title="Association Rozier en Donzon">
-	<ion-content>
-	
+	<ion-content>	
 		<label class="item item-input item-select">
 			<i class="icon ion-search placeholder-icon"></i>
 			<input type="search" ng-model="searchquery" placeholder="Entrer le nom ou la classe ici"/>
@@ -12,9 +11,8 @@
       
       <ion-list >
 
-        <ion-item ng-repeat="item in enfants|filter : searchquery | orderBy : organiser" item="item"
-                  href="#/item/{{item.id}}" class="item-remove-animate">
-			{{ item.nom }}
+        <ion-item ng-repeat="item in enfants|filter : searchquery | orderBy : organiser" item="item" class="item-remove-animate">
+			{{ item.nom }} {{item.prenom}}
 			
 			<ion-option-button class="button button-balanced"
                              ng-click="arriver(item)">
@@ -31,6 +29,8 @@
 			 </ion-option-button>
         </ion-item>
       </ion-list>
-
-    </ion-content>
+  </ion-content>
+	<div class="bar bar-footer">
+		  <button class="button button-clear button-positive" ng-click="init()">Mise à jour</button>
+	  </div>
 </ion-view>

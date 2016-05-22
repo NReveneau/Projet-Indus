@@ -1,4 +1,4 @@
-<ion-view view-title="Fiche : {{nom}}">
+<ion-view view-title="Fiche : {{nom}} {{prenom}}">
 	<ion-content>
 		<div class="card">
 		  <div class="item item-divider">
@@ -6,6 +6,8 @@
 		  </div>
 		  <div class="item item-text-wrap">
 				Nom : {{nom}}
+				</br>
+				Prénom : {{prenom}}
 				</br>
 				Âge : {{age}} ans
 				</br>
@@ -15,16 +17,13 @@
 			Pointage du Jour
 		  </div>
 		  <div class="item item-text-wrap">
-				Arrivée : 
+				Arrivée : {{E1}}
 				</br>
-				Sortie :
+				Sortie : {{S1}}
 				</br>
-				Arrivée :
+				Arrivée : {{E2}}
 				</br>
-				Sortie :
+				Sortie : {{S2}}
 		  </div>
-		<div class="padding" ng-click="modifier()">
-			<button class="button button-block button-energized">Modifier</button>
-		</div>
 	</ion-content>
 </ion-view>
