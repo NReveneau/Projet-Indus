@@ -5,37 +5,17 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('MyApp', ['ionic', 'ngStorage'])
 
-.factory ('StorageService', function ($localStorage) {
+//Le controlleur de la page principale
+.controller('MyCtrl', function($scope,$http,$ionicLoading,$state){
 
-  $localStorage = $localStorage.$default({
-    things: []
-  });
-  
-
-  var _getAll = function () {
-    return $localStorage.things;
-  };
-
-  var _add = function (thing) {
-    $localStorage.things.push(thing);
-  }
-
-  var _remove = function (thing) {
-    $localStorage.things.splice($localStorage.things.indexOf(thing), 1);
-  }
-
-  return {
-    getAll: _getAll,
-    add: _add,
-    remove: _remove
-  };
-})
-
-.controller('MyCtrl', function($scope,$http,$ionicLoading,$state,StorageService){
-
+//Fonction correspondant au bouton "Mise à jour",
+// servant à charger la liste d'enfants et la stocker en locale
   $scope.init = function(){
 	window.localStorage.removeItem('Hello');
+	
+	//à implémenter dès que la liaison sera prête côté application web
 	 /*
+		var items;
         $http.get("adresse fichier json")
             .success(function(data) {
                 items=data;
@@ -44,7 +24,7 @@ angular.module('MyApp', ['ionic', 'ngStorage'])
                 alert("ERROR");
             })
 	*/
-  // à remplacer par requête http ci-dessus
+  // tableau test à remplacer par requête http ci-dessus
 	var items = [{
 						"id":"0001",
 						"nom":"Matin",
@@ -113,38 +93,41 @@ angular.module('MyApp', ['ionic', 'ngStorage'])
 						"S2":""
 					}
 		];
-		alert('ok');
 	window.localStorage.setItem('Hello',JSON.stringify(items));  
 	$scope.enfants = JSON.parse(window.localStorage.getItem('Hello'));
-	alert('perfect');
   }
   
-  
+//Fonction relative au bouton "arrivée",
+// pour enregistrer l'heure d'arrivée de l'enfant 
   $scope.arriver = function(item) {
 	var date = new Date();
-	alert('Arrivée de '+ item.nom + ' à '+ date.getHours()+"h "+date.getMinutes()+"min "+date.getSeconds()+"s");
 	if (item.E1 == ""){
-		item.E1=date;
+		item.E1=date.getHours()+":"+date.getMinutes();
 	}else if(item.E2==""){
-		item.E2=date;
+		item.E2=date.getHours()+":"+date.getMinutes();
 	}else{
-		alert('Trop de pointage');
+		alert('Trop de pointage'); //POPUP //en cas de pointage de trop !
 	}
 	window.localStorage.setItem('Hello',JSON.stringify($scope.enfants)); 
 	$scope.enfants = JSON.parse(window.localStorage.getItem('Hello'));
   };
+  
+ //Fonction relative au bouton "sortie",
+// pour enregistrer l'heure de sortie de l'enfant 
   $scope.sortir = function(item) {
 	var date = new Date();
-    alert('Sortie de '+ item.nom + ' à '+ date.getHours()+"h "+date.getMinutes()+"min "+date.getSeconds()+"s");
 	if (item.S1 == ""){
-		item.S1=date;
+		item.S1=date.getHours()+":"+date.getMinutes();
 	}else if(item.S2==""){
-		item.S2=date;
+		item.S2=date.getHours()+":"+date.getMinutes();
 	}else{
-		alert('Trop de pointage');
+		alert('Trop de pointage'); //POPUP //en cas de pointage de trop !
 	}
+	window.localStorage.setItem('Hello',JSON.stringify($scope.enfants)); 
+	$scope.enfants = JSON.parse(window.localStorage.getItem('Hello'));
   };
-  
+ //Fonction relative au bouton "voir plus",
+// pour pouvoir passer à la fiche de l'enfant 
   $scope.plus = function(item) {
 	var nom=item.nom
 	var prenom=item.prenom
@@ -155,12 +138,22 @@ angular.module('MyApp', ['ionic', 'ngStorage'])
 	var S1=item.S1
 	var S2=item.S2
 	$state.go('fiche',{nom : nom, prenom : prenom, age : age, classe : classe, E1 : E1, E2 : E2, S1 : S1, S2 : S2 });
-  };
+  }
   
+  //Variable "enfants" ayant pour contenu la liste enregistrée en locale
   $scope.enfants = JSON.parse(window.localStorage.getItem('Hello'));
   
+  //Fonction relative à la mise à jour des modifications pour la visualisation
+  $scope.recharger=function(){
+	$scope.enfants = JSON.parse(window.localStorage.getItem('Hello'));
+  }
+  
+  
+ //Fonction correspondant au bouton "Envoyer les données du jour",
+// servant à envoyer les pointage du jour
+//à implémenter dès que la liaison sera prête côté application web
   $scope.envoyer=function(){
-	 /* $http.post("adresse fichier json",data)
+	 /* $http.post("adresse fichier json",JSON.stringify(JSON.parse(window.localStorage.getItem('Hello'))))
             .success(function() {
                 alert("ERROR");
             })
@@ -170,7 +163,11 @@ angular.module('MyApp', ['ionic', 'ngStorage'])
   }
 })
 
+
+//Le Controlleur de la page "fiche" enfant
 .controller('FicheCtrl', function($scope,$ionicLoading,$state,$stateParams) {
+
+	//ici il s'agit de faire le lien entre les données des 2 pages
 	 $scope.nom = $stateParams.nom;
 	 $scope.prenom=$stateParams.prenom;
 	 $scope.classe = $stateParams.classe;
@@ -179,8 +176,36 @@ angular.module('MyApp', ['ionic', 'ngStorage'])
 	 $scope.S1=$stateParams.S1;
 	 $scope.E2=$stateParams.E2;
 	 $scope.S2=$stateParams.S2;
+	 
+ //Fonction relative au bouton "modifier",
+// pour modifier un pointage ou le supprimer
+	 $scope.modifier = function(){
+		var tableau = JSON.parse(window.localStorage.getItem('Hello'));
+		var horaire = document.getElementById("horaire").value;
+		var pointage = document.getElementById('pointage').selectedIndex;
+		for (var name in tableau){
+		 if (tableau[name].nom == $scope.nom){ 
+			switch(pointage) {
+				case 0:
+					tableau[name].E1=horaire;
+					break;
+				case 1:
+					tableau[name].S1=horaire;
+					break;
+				case 2:
+					tableau[name].E2=horaire;
+					break;
+				default:
+					tableau[name].S2=horaire;
+					break;
+			}
+		}
+		}
+		window.localStorage.setItem('Hello',JSON.stringify(tableau));
+	 }
 })
 
+//Sert à la configuration/au paramétrage pour la navigation entre les différentes pages
 .config(function($stateProvider,$urlRouterProvider){
 		$urlRouterProvider.otherwise('/home')
 		$stateProvider
@@ -189,7 +214,8 @@ angular.module('MyApp', ['ionic', 'ngStorage'])
 			templateUrl:'pages/home.html',
 			controller : 'MyCtrl'})
 			.state('fiche',{
-			url:'/fiche/:nom/:prenom/:classe/:age/:E1/:E2/:S1/:S2',
+			url:'/fiche/:nom/:prenom/:classe/:age/:E1/:E2/:S1/:S2',//les éléments suite à la fiche 
+																//nécessaires pour la liaison de données
 			templateUrl:'pages/fiche.html',
 			controller : 'FicheCtrl'})
 })

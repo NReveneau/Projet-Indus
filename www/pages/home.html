@@ -1,19 +1,26 @@
 <ion-view view-title="Association Rozier en Donzon">
-	<ion-content>	
+	<ion-content>
+		<!--Première "ligne" sous la barre de navigation avec icone recherche, 
+		barre de recherche (input), et le select (pour les différentes options de tri)-->
 		<label class="item item-input item-select">
+		
 			<i class="icon ion-search placeholder-icon"></i>
+			
 			<input type="search" ng-model="searchquery" placeholder="Entrer le nom ou la classe ici"/>
+			
 			<select ng-model="organiser">
-				<option selected value="nom">Organiser par nom</option>
+				<option value selected ="nom">Organiser par nom</option>
 				<option value="classe">Organiser par classe</option>	
 			</select>
+			
 		</label>
-      
+      <!--Liste des enfants-->
       <ion-list >
-
+		<!--définition d'un item de la liste répétée par la suite via le ng-repeat-->
         <ion-item ng-repeat="item in enfants|filter : searchquery | orderBy : organiser" item="item" class="item-remove-animate">
 			{{ item.nom }} {{item.prenom}}
-			
+			<!--Les différents boutons pour les différents pointages 
+			et l'accès à la fiche de l'enfant en question-->
 			<ion-option-button class="button button-balanced"
                              ng-click="arriver(item)">
 				Arrivée
@@ -30,7 +37,12 @@
         </ion-item>
       </ion-list>
   </ion-content>
+   <!--Les 3 boutons "Nouveau jour", "Mise à jour" et "Envoyer les données du jour" en pied de page-->
 	<div class="bar bar-footer">
-		  <button class="button button-clear button-positive" ng-click="init()">Mise à jour</button>
-	  </div>
+		<div class="button-bar">
+		  <a class="button button-outline button-positive" ng-click="init()">Nouveau jour</a>
+		  <a class="button button-outline button-positive" ng-click="recharger()">Mise à jour</a>
+		  <a class="button button-outline button-positive" ng-click="envoyer()">Envoyer les données du jour</a>
+		</div>
+	</div>
 </ion-view>
