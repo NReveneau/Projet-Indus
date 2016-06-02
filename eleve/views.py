@@ -1,8 +1,44 @@
+from django.shortcuts import render
+from forms import EnfantForm
 from .serializers import EnfantSerializer
 from .models import Enfant
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
+def enfant_list(request):
+	enfants=Enfant.objects.all()
+	return render(request,'appli/enfant_liste.html',{'enfants': enfants})
+
+def AjouterEnfant(request):
+	form =  EnfantForm()
+	return render(request,'appli/ajouter_enfant.html',{'form': form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @api_view(['GET','POST'])
@@ -14,7 +50,7 @@ def liste(request):
 		return Response(serializer.data)
 
 	elif request.method == 'POST' :
-		serializer = EnfantSerializer(data = request.data)
+		serializer = EnfantSerializer(data = request.data, many = True)
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data,status = status.HTTP_201_CREATED)
