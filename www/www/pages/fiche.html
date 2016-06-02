@@ -1,0 +1,55 @@
+<ion-view view-title="Fiche : {{nom}} {{prenom}}">
+	<ion-content>
+	<!-- Affichage des données de la personne-->
+		<div class="card">
+		  <div class="item item-divider">
+			Identité
+		  </div>
+		  <div class="item item-text-wrap">
+				Nom : {{nom}}
+				</br>
+				Prénom : {{prenom}}
+				</br>
+				Âge : {{age}} ans
+				</br>
+				Classe : {{classe}}
+		  </div>
+		  <div class="item item-divider">
+			Pointage du Jour
+		  </div>
+	<!-- Affichage des pointages de la personne-->
+		  <div class="item item-text-wrap">
+				1- Arrivée : {{E1}}
+				</br>
+				2- Sortie : {{S1}}
+				</br>
+				3- Arrivée : {{E2}}
+				</br>
+				4- Sortie : {{S2}}
+		  </div>
+	<!-- Partie Modifications des pointages-->
+		  <div class="item item-divider">
+			Modifications des pointages 
+		  </div>
+		  <div class="item item-wrap">
+			<label class="item item-input item-select">
+				<span class="input-label">   Remplacer le  </span> 
+	<!--Pour le choix u pointage à modifier-->
+				<select id="pointage" position="relative">
+				  <option value selected ="1">premier pointage</option>
+				  <option value="2">deuxième pointage </option>
+				  <option value="3">troisième pointage</option>
+				  <option value="4">quatrième pointage</option>
+				</select>			
+			</label>
+			<label class=" item item-input item-button">
+			  <span class="input-label">Par  </span>
+	<!-- Pour rentrer ce par quoi on remplace le pointage-->
+			  <input type="time" id="horaire">		
+		  </label>
+		  <button class="button button-block button-energized" ng-click="modifier()"> Modifier </button>
+			Pour supprimer un pointage, le valider sans rentrer d'heure.
+			La modification ne sera visible qu'après avoir mise à jour l'application.
+		  </div>
+	</ion-content>
+</ion-view>
