@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Enfant
 
 class EnfantSerializer(serializers.ModelSerializer):
+	#le serializer permet de convertir les donnée au format JSON
 
 	class Meta:
 		model = Enfant
