@@ -1,4 +1,6 @@
-# Projet-Indus
+# Projet-Indus-appli web 
+
+Installation:
 
 pip install django==1.8.9
 
@@ -18,4 +20,4 @@ chmod 777 sqlite3.db
 
 python manage.py runserver
 
-appli web
+L'adresse du serializer est la suivante : http://127.0.0.1:8000/enfants/
