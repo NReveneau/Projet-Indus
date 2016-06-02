@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title>ENFANTS</title>
+	</head>
+	
+
+	<body>
+		
+		<div>
+			<h1>LISTE DES ENFANTS</h1>
+		</div>
+
+		{% for enfants in enfants %}
+			<div>
+				<p>
+					<li>NOM: {{enfants.lastname}}</li>
+					<li>PRENOM: {{enfants.firstname}}</li>
+					<li>CLASSE: {{enfants.classe}}</li>
+					<li>date: {{enfants.date}}</li>
+					<li>E1: {{enfants.E1}}</li>
+					<li>S1: {{enfants.S1}}</li>
+					<li>E2: {{enfants.E2}}</li>
+					<li>S2: {{enfants.S2}}</li>
+					li>Nindiv: {{enfants.Nindiv}}</li>
+					<br \>
+				</p>
+			</div>
+		{% endfor %}
+
+	</body>
+</html>
