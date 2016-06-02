@@ -6,6 +6,8 @@ pip install balafon
 
 pip install django-modeltranslation
 
+python manage.py makemigrations
+
 python manage.py migrate
 
 python manage.py sync_translation_fields
