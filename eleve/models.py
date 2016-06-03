@@ -5,9 +5,8 @@
 
 from django.db import models
 
+#modèles contenant les informations nécessaires à la liaison avec l'application mobile
 class Enfant(models.Model):
-
-
 
 	nom = models.CharField((u'last name'), max_length=200, blank=False, default=u'', db_index=True)
 	prenom = models.CharField((u'first name'), max_length=200, blank=False, default=u'')
@@ -26,8 +25,6 @@ class Enfant(models.Model):
 
 
 class EnfantComplete(models.Model):
-
-
 
 	nom = models.CharField((u'last name'), max_length=200, blank=False, default=u'', db_index=True)
 	prenom = models.CharField((u'first name'), max_length=200, blank=False, default=u'')
