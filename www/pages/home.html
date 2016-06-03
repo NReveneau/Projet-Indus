@@ -9,7 +9,7 @@
 			<input type="search" ng-model="searchquery" placeholder="Entrer le nom ou la classe ici"/>
 			
 			<select ng-model="organiser">
-				<option value selected ="nom">Organiser par nom</option>
+				<option value="nom" selected>Organiser par nom</option>
 				<option value="classe">Organiser par classe</option>	
 			</select>
 			
@@ -17,7 +17,7 @@
       <!--Liste des enfants-->
       <ion-list >
 		<!--définition d'un item de la liste répétée par la suite via le ng-repeat-->
-        <ion-item ng-repeat="item in enfants|filter : searchquery | orderBy : organiser" item="item" class="item-remove-animate">
+        <ion-item ng-repeat="item in enfants | orderBy :organiser|filter : searchquery" item="item" class="item-remove-animate">
 			{{ item.nom }} {{item.prenom}}
 			<!--Les différents boutons pour les différents pointages 
 			et l'accès à la fiche de l'enfant en question-->

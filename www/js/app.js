@@ -101,12 +101,14 @@ angular.module('MyApp', ['ionic', 'ngStorage'])
 // pour enregistrer l'heure d'arrivée de l'enfant 
   $scope.arriver = function(item) {
 	var date = new Date();
+	var heures = date.getHours();
+	var minutes = date.getMinutes();
+	if(date.getHours()<10)heures = "0"+heures;
+	if(date.getMinutes()<10)minutes = "0"+minutes;	
 	if (item.E1 == ""){
-		if(date.getMinutes()<10)item.E1=date.getHours()+":0"+date.getMinutes()+":00";
-		else item.E1=date.getHours()+":"+date.getMinutes()+":00";
+		item.E1=heures+":"+minutes+":00";
 	}else if(item.E2==""){
-		if(date.getMinutes()<10)item.E2=date.getHours()+":0"+date.getMinutes()+":00";
-		else item.E2=date.getHours()+":"+date.getMinutes()+":00";
+		item.E2=heures+":"+minutes+":00";
 	}else{
 		alert('Trop de pointage'); //POPUP //en cas de pointage de trop !
 	}
@@ -118,12 +120,14 @@ angular.module('MyApp', ['ionic', 'ngStorage'])
 // pour enregistrer l'heure de sortie de l'enfant 
   $scope.sortir = function(item) {
 	var date = new Date();
+	var heures = date.getHours();
+	var minutes = date.getMinutes();
+	if(date.getHours()<10)heures = "0"+heures;
+	if(date.getMinutes()<10)minutes = "0"+minutes;
 	if (item.S1 == ""){
-		if(date.getMinutes()<10)item.S1=date.getHours()+":0"+date.getMinutes()+":00";
-		else item.S1=date.getHours()+":"+date.getMinutes()+":00";
+		item.S1=heures+":"+minutes+":00";
 	}else if(item.S2==""){
-		if(date.getMinutes()<10)item.S2=date.getHours()+":0"+date.getMinutes()+":00";
-		else item.S2=date.getHours()+":"+date.getMinutes()+":00";
+		item.S2=heures+":"+minutes+":00";
 	}else{
 		alert('Trop de pointage'); //POPUP //en cas de pointage de trop !
 	}
@@ -191,16 +195,20 @@ angular.module('MyApp', ['ionic', 'ngStorage'])
 		 if ((tableau[name].nom == $scope.nom) && (tableau[name].prenom == $scope.prenom)){ 
 			switch(pointage) {
 				case 0:
-					tableau[name].E1=horaire+":00";
+					if (horaire == "") tableau[name].E1="";
+					else tableau[name].E1=horaire+":00";
 					break;
 				case 1:
-					tableau[name].S1=horaire+":00";
+					if (horaire == "") tableau[name].S1="";
+					else tableau[name].S1=horaire+":00";
 					break;
 				case 2:
-					tableau[name].E2=horaire+":00";
+					if (horaire == "") tableau[name].E2="";
+					else tableau[name].E2=horaire+":00";
 					break;
 				default:
-					tableau[name].S2=horaire+":00";
+					if (horaire == "") tableau[name].S2="";
+					else tableau[name].S2=horaire+":00";
 					break;
 			}
 		}
