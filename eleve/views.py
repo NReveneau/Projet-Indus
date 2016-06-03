@@ -9,15 +9,17 @@ from rest_framework.response import Response
 from datetime import datetime, date
 
 
-
+#permet l'affichage de la liste des entrées dans Enfant pour l'interface graphique
 def enfant_list(request):
 	enfants=Enfant.objects.all()
 	return render(request,'appli/enfant_liste.html',{'enfants': enfants})
-
+	
+#permet l'affichage de la liste des entrées dans EnfantComplete pour l'interface graphique
 def enfantcomplete_list(request):
 	enfantscomplete=EnfantComplete.objects.all()
 	return render(request,'appli/enfantcomplete_liste.html',{'enfantscomplete': enfantscomplete})
 
+#permet l'affichage du formulaire d'ajout d'entrées dans Enfant depuis l'interface graphique et redirection après POST
 def ajouterEnfant(request):
 	if request.method == "POST":
 		form=EnfantForm(request.POST)
@@ -29,7 +31,7 @@ def ajouterEnfant(request):
 		form=EnfantForm()
 		return render(request, 'appli/ajouter_enfant.html', {'form':form})
 
-
+#permet l'affichage du formulaire d'ajout d'entrées dans EnfantComplete depuis l'interface graphique et redirection après POST
 def ajouterEnfantComplete(request):
 	if request.method == "POST":
 		form=EnfantCompleteForm(request.POST)
@@ -43,31 +45,7 @@ def ajouterEnfantComplete(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#view permettant l'affichage de la page donnant et récupérant les Json pour le modèle Enfant
 @api_view(['GET','POST'])
 def liste(request):
 
@@ -86,7 +64,7 @@ def liste(request):
 
 		return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-
+#non utilisé pour l'instant mais peut être utile pour effectuer des opérations sur un seul enfant à partir d'un format json.(Enfant)
 @api_view(['GET','PUT','DELETE'])
 def details(request, Nindiv):
 
@@ -112,7 +90,7 @@ def details(request, Nindiv):
 		return Response(status = status.HTTP_204_NO_CONTENT)
 
 
-
+#view permettant l'affichage de la page donnant et récupérant les Json pour le modèle EnfantComplete
 @api_view(['GET','POST'])
 def listeComplete(request):
 
@@ -129,7 +107,7 @@ def listeComplete(request):
 
 		return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-
+#non utilisé pour l'instant mais peut être utile pour effectuer des opérations sur un seul enfant à partir d'un format json.(EnfantComplete)
 @api_view(['GET','PUT','DELETE'])
 def detailsComplete(request, Nindiv):
 
