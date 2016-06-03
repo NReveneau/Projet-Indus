@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>ENFANTS </title>
+	</head>
+	
+
+	<body>
+		
+		<div>
+			<h1>AJOUT D'ENFANT</h1>
+		</div>
+
+		<div>
+
+			<form method="POST" class="post-form">{% csrf_token %}
+			{{form.as_p}}
+			<button type="submit" class="save btn btn-default">Save</button>
+				
+		</div>
+
+	</body>
+</html>

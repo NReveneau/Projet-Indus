@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title>ENFANTS</title>
+	</head>
+	
+
+	<body>
+		
+		<div>
+			<h1>LISTE DES ENFANTS AVEC POINTAGE</h1>
+		</div>
+
+		{% for enfantscomplete in enfantscomplete %}
+			<div>
+				<p>
+					<li>NOM: {{enfantscomplete.nom}}</li>
+					<li>PRENOM: {{enfantscomplete.prenom}}</li>
+					<li>CLASSE: {{enfantscomplete.classe}}</li>
+					<li>date: {{enfantscomplete.date}}</li>
+					<li>E1: {{enfantscomplete.E1}}</li>
+					<li>S1: {{enfantscomplete.S1}}</li>
+					<li>E2: {{enfantscomplete.E2}}</li>
+					<li>S2: {{enfantscomplete.S2}}</li>
+					<li>Nindiv: {{enfantscomplete.Nindiv}}</li>
+					<li>age: {{enfantscomplete.age}}</li>
+					<br \>
+				</p>
+			</div>
+		{% endfor %}
+
+	</body>
+</html>
